@@ -12,19 +12,22 @@ module.exports = (_, { mode }) => {
   const WEBAPP_DIR = isDevelopment ? "dfp-dev/" : "/";
   const PORT = process.env.PORT || 3000;
   const config = {
-    entry: { main: "./src/App.jsx" },
+    entry: path.resolve(__dirname, "./src/index.js"),
     output: {
       path: path.resolve(__dirname, "build"),
       // publicPath: auto,
       filename: isDevelopment ? "[name].[contenthash].bundle.js" : "[name].[contenthash].bundle.js",
       chunkFilename: isDevelopment ? "[name].[contenthash].bundle.js" : "[name].[contenthash].bundle.js",
     },
+    resolve: {
+      extensions: [".js", ".ts", ".tsx", ".jsx"],
+    },
     module: {
       rules: [
         isDevelopment
           ? {
               test: /\.(js|jsx|ts|tsx)$/,
-              exclude: /(nodemodules|browser_components)/,
+              exclude: /(node_modules|browser_components)/,
               use: [
                 {
                   loader: "babel-loader",
@@ -36,7 +39,7 @@ module.exports = (_, { mode }) => {
             }
           : {
               test: /\.(js|jsx|ts|tsx)$/,
-              exclude: /(nodemodules|browser_components)/,
+              exclude: /(node_modules|browser_components)/,
               use: [
                 {
                   loader: "babel-loader",
@@ -45,24 +48,35 @@ module.exports = (_, { mode }) => {
             },
         {
           test: /\s?css$/,
-          use: [isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", { loader: "sass-loader" }],
+          // exclude: /(node_modules|browser_components)/,
+          // use: [isDevelopment ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", { loader: "sass-loader" }],
+          use: ["style-loader", "css-loader", "postcss-loader"],
         },
+        // {
+        //   test: /\.(ts|tsx)$/,
+        //   exclude: /node_modules/,
+        //   use: "ts-loader",
+        // },
         {
           test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+          exclude: /node_modules/,
           use: [{ loader: "file-loader" }],
         },
         {
           test: /\.png/,
+          exclude: /node_modules/,
           use: [{ loader: "url-loader?limit=10000&mimetype=image/png" }],
         },
         {
           test: /\.m?js/,
+          exclude: /node_modules/,
           resolve: {
             fullySpecified: false,
           },
         },
       ].filter(Boolean),
     },
+
     plugins: [
       isDevelopment
         ? new HtmlWebpackPlugin({

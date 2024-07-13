@@ -1,0 +1,55 @@
+.deatil_box::before, .deatil_box::after{
+    content: "";
+    width: 0;
+    height: 1px;
+    position: absolute;
+    transition: all .2s linear;
+    background: #000;
+}
+.deatil_box::before {
+    right: 0;
+    top: -1px;
+    transition-delay: .2s;
+}
+.deatil_box::after{
+    left: 0;
+    bottom: -1px;
+    transition-delay: .6s;
+}
+.detail_box_main:hover .deatil_box::before, .detail_box_main:hover .deatil_box::after{
+    width: calc(100% + 1px);
+}
+.detail_box_main:hover .deatil_box::before{
+    transition-delay: .4s;
+}
+.detail_box_main:hover .deatil_box::after{
+    transition-delay: 0s;
+}
+
+.deatil_box_inner::before, .deatil_box_inner::after{
+    content: "";
+    width: 1px;
+    height: 0;
+    position: absolute;
+    transition: all .2s linear;
+    background: #000;
+}
+.deatil_box_inner::before {
+    transition-delay: 0s;
+    left: -1px;
+    top: 0;
+}
+.deatil_box_inner::after{
+    transition-delay: .4s;
+    right: -1px;
+    bottom: 0;
+}
+.detail_box_main:hover .deatil_box_inner::before, .detail_box_main:hover .deatil_box_inner::after{
+    height: calc(100% + 1px);
+}
+.detail_box_main:hover .deatil_box_inner::before{
+    transition-delay: .6s;
+}
+.detail_box_main:hover .deatil_box_inner::after{
+    transition-delay: .2s;
+}
