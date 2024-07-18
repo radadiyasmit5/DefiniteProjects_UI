@@ -14,19 +14,19 @@ function App() {
 
   return (
     <>
-      <Navbar/> 
+      <Navbar />
       <Routes>
-        
-        <Route path='/about-us' element={<About/>} />
-        <Route index path="/login" element={<LoginPage/>} />
+        <Route path='/about-us' element={<About />} />
+        {/* <Route path="/login" element={<LoginPage />} /> */}
         <Route path="/" element={<Home />} />
-        {/* <Route path="/" element={<AuthLayout />}>
-            <Route path="login" element={<LoginPage/>} />
-            <Route path="signup" element={<Signup />} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
-          </Route> */}
+        {/* <Route path="/*" element={<Home />} /> */}
+        <Route path="/" element={<AuthLayout />}>
+          <Route path="login" element={<LoginPage />} />
+          <Route path="signup" element={<Signup />} />
+          <Route path="forgot-password" element={<ForgotPassword />} />
+        </Route>
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 }
