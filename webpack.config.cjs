@@ -15,7 +15,7 @@ module.exports = (_, { mode }) => {
     entry: path.resolve(__dirname, "./src/index.js"),
     output: {
       path: path.resolve(__dirname, "build"),
-      // publicPath: auto,
+      publicPath: '/',
       filename: isDevelopment ? "[name].[contenthash].bundle.js" : "[name].[contenthash].bundle.js",
       chunkFilename: isDevelopment ? "[name].[contenthash].bundle.js" : "[name].[contenthash].bundle.js",
     },
@@ -26,26 +26,26 @@ module.exports = (_, { mode }) => {
       rules: [
         isDevelopment
           ? {
-              test: /\.(js|jsx|ts|tsx)$/,
-              exclude: /(node_modules|browser_components)/,
-              use: [
-                {
-                  loader: "babel-loader",
-                  options: {
-                    cacheDirectory: true,
-                  },
+            test: /\.(js|jsx|ts|tsx)$/,
+            exclude: /(node_modules|browser_components)/,
+            use: [
+              {
+                loader: "babel-loader",
+                options: {
+                  cacheDirectory: true,
                 },
-              ],
-            }
+              },
+            ],
+          }
           : {
-              test: /\.(js|jsx|ts|tsx)$/,
-              exclude: /(node_modules|browser_components)/,
-              use: [
-                {
-                  loader: "babel-loader",
-                },
-              ],
-            },
+            test: /\.(js|jsx|ts|tsx)$/,
+            exclude: /(node_modules|browser_components)/,
+            use: [
+              {
+                loader: "babel-loader",
+              },
+            ],
+          },
         {
           test: /\s?css$/,
           // exclude: /(node_modules|browser_components)/,
@@ -80,18 +80,19 @@ module.exports = (_, { mode }) => {
     plugins: [
       isDevelopment
         ? new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "./src/template.html"),
-            files: {
-              js: ["bundle.js"],
-            },
-          })
+          template: path.resolve(__dirname, "./src/template.html"),
+          files: {
+            js: ["bundle.js"],
+          },
+          base: '/'
+        })
         : new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, "./src/template.html"),
-            files: {
-              css: "[contenthash].css",
-              js: "[contenthash].js",
-            },
-          }),
+          template: path.resolve(__dirname, "./src/template.html"),
+          files: {
+            css: "[contenthash].css",
+            js: "[contenthash].js",
+          },
+        }),
     ],
 
     // plugins: ["@babel/plugin-syntax-jsx"],
@@ -100,6 +101,7 @@ module.exports = (_, { mode }) => {
       static: {
         directory: path.join(__dirname, "public"),
       },
+      historyApiFallback: true,
       compress: true,
       port: PORT,
     },
