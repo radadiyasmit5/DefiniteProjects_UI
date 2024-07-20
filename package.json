@@ -51,5 +51,8 @@
     "ts-loader": "^9.5.1",
     "typescript": "^5.5.3",
     "webpack-dev-server": "^5.0.4"
+  },
+  "browser": {
+    "[module-name]": false
   }
 }
