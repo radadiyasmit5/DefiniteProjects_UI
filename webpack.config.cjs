@@ -12,7 +12,7 @@ module.exports = (_, { mode }) => {
   const WEBAPP_DIR = isDevelopment ? "dfp-dev/" : "/";
   const PORT = process.env.PORT || 3000;
   const config = {
-    entry: path.resolve(__dirname, "./src/index.js"),
+    entry: path.resolve(__dirname, "src/index.js"),
     output: {
       path: path.resolve(__dirname, "build"),
       publicPath: '/',
