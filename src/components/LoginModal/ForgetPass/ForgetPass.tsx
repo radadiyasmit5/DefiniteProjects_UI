@@ -6,7 +6,7 @@ const ForgotPassword = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Forgot Password form submitted with:', { email });
+
     // Handle forgot password logic here
   };
 
@@ -23,7 +23,7 @@ const ForgotPassword = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <p className="text-gray-900 mt-4">
-            Remembered your password? 
+            Remembered your password?
             <Link to="/login" className="text-sm text-blue-500 hover:underline mt-4"> Login</Link>
           </p>
           <button
@@ -34,7 +34,7 @@ const ForgotPassword = () => {
           </button>
         </form>
       </div>
-      </form>
+    </form>
   );
 };
 

@@ -3,9 +3,16 @@ const CopyPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const dotenv = require('dotenv');
 
 const HOST = process.env.HOST || "0.0.0.0";
 const PORT = process.env.PORT || "3000";
+const env = dotenv.config().parsed;
+
+const envKeys = Object.keys(env).reduce((prev, next) => {
+  prev[`process.env.${next}`] = JSON.stringify(env[next]);
+  return prev;
+}, {});
 
 module.exports = (_, { mode }) => {
   const isDevelopment = mode !== "production";
@@ -93,11 +100,15 @@ module.exports = (_, { mode }) => {
             js: "[contenthash].js",
           },
         }),
+
+      new webpack.DefinePlugin(envKeys)
+
     ],
 
     // plugins: ["@babel/plugin-syntax-jsx"],
     mode: !isDevelopment ? "production" : "development",
     devServer: {
+      open: true,
       static: {
         directory: path.join(__dirname, "public"),
       },
@@ -106,5 +117,6 @@ module.exports = (_, { mode }) => {
       port: PORT,
     },
   };
+
   return config;
 };

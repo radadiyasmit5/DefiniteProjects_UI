@@ -5,7 +5,7 @@ const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     // Handle login logic here
@@ -40,7 +40,7 @@ const LoginForm = () => {
             </Link>
           </div>
           <p className="text-gray-900 mt-4">
-            Don't have an account? 
+            Don't have an account?
             <Link to="/signup" className="text-sm text-blue-500 hover:underline mt-4"> Signup</Link>
           </p>
           <button
@@ -51,7 +51,7 @@ const LoginForm = () => {
           </button>
         </form>
       </div>
-      </form>
+    </form>
   );
 };
 

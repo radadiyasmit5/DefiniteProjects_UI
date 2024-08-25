@@ -1,18 +1,30 @@
 {
-    "compilerOptions": {
-      "target": "es5",
-      "extendedDiagnostics": true,
-      "lib": ["dom", "es2015", "es2017"],
-      "module": "esnext",
-      "moduleResolution": "node",
-      "jsx": "react", // Ensure this line is present and set to "react"
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "forceConsistentCasingInFileNames": true,
-      "noEmit": true,
-      "sourceMap": true
-    },
-    "include": ["src/**/*.ts", "src/**/*.tsx"],
-    "exclude": ["node_modules"]
-  }
+  "compilerOptions": {
+    "target": "es5",
+    "extendedDiagnostics": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2017"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "jsx": "react", // Ensure this line is present and set to "react"
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "sourceMap": true
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/components/LoginModal/SignUP/SignUp.jsx",
+    "src/components/Navbar/index.jsx",
+    "src/components/LoginModal/LoginForm/Login.jsx"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-
+import { registerbyusernamePassword } from '../../../api/AuthRequests';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const Signup = () => {
   const [username, setUsername] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Add form validation logic here
     if (password !== confirmPassword) {
@@ -17,17 +21,69 @@ const Signup = () => {
       alert('You must accept the terms and conditions');
       return;
     }
-    console.log('Form submitted with:', { username, password, confirmPassword, termsAccepted });
+
+    registerbyusernamePassword(name, username, password, email).then((data) => {
+
+
+    }).catch((err) => {
+
+      toast.error(err?.response?.data?.message, {
+        // position: "top-right",
+        // autoClose: 5000,
+        // hideProgressBar: false,
+        // closeOnClick: true,
+        // pauseOnHover: true,
+        // draggable: true,
+        // progress: undefined,
+        // theme: "dark",
+        // transition: Bounce,
+      })
+    })
+
+
+
+    // if (res.data) {
+    //   console.log(res.data);
+
+    // }
+
     // Handle signup logic here
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <>
+      <form onSubmit={handleSubmit}>
         <div className="w-full bg-white rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <p className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
               Create an account
             </p>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900">
+                Your email
+              </label>
+              <input
+                placeholder="JohnDoe@hmail.com"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div>
+              <label className="block mb-2 text-sm font-medium text-gray-900">
+                Your Full Name
+              </label>
+              <input
+                placeholder="JohnDoe"
+                className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg block w-full p-2.5"
+                id="name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div>
               <label className="block mb-2 text-sm font-medium text-gray-900">
                 Your username
@@ -95,7 +151,9 @@ const Signup = () => {
             </button>
           </div>
         </div>
-    </form>
+      </form>
+      <ToastContainer />
+    </>
   );
 };
 
